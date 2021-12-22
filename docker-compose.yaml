@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  postgres_hpc:
+    image: postgres:10.11-alpine
+    container_name: postgres_hpc
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=hpc
+
+  app_hpc:
+    build: .
+    container_name: app_hpc
+    ports:
+      - "8888:8888"
+    depends_on:
+      - "postgres_hpc"
